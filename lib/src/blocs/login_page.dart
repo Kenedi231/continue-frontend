@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:continue_app/src/material/routes.dart';
+import 'package:continue_app/src/models/login_model.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -10,6 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class _LoginPage extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
                   hintText: 'Enter your email',
                 ),
@@ -38,7 +42,10 @@ class _LoginPage extends State<LoginPage> {
                 child: Text('Posts page'),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    Navigator.pushNamed(context, '/posts');
+                    Navigator.pushNamed(context, PostsPageRoute, arguments: LoginModel(
+                      emailController.text,
+                      '123456'
+                    ));
                   }
                 },
               ),

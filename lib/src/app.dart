@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:continue_app/src/material/routes.dart';
 import 'package:continue_app/src/blocs/login_page.dart';
 import 'package:continue_app/src/blocs/posts_page.dart';
 
@@ -10,10 +11,10 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: LoginPageRoute,
       routes: {
-        '/': (context) => LoginPage(),
-        '/posts': (context) => PostsPage(),
+        LoginPageRoute: (_) => LoginPage(),
+        PostsPageRoute: (context) => PostsPage(ModalRoute.of(context).settings.arguments),
       },
     );
   }
