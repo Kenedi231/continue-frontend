@@ -10,9 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,35 +21,57 @@ class _LoginPage extends State<LoginPage> {
         title: Text('Login page'),
       ),
       body: Center(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your email',
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.black12, borderRadius: BorderRadius.circular(20.0)),
+          padding: EdgeInsets.all(20.0),
+          alignment: Alignment.topCenter,
+          width: 300,
+          height: 250,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Incorrect email';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              RaisedButton(
-                child: Text('Posts page'),
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    Navigator.pushNamed(context, PostsPageRoute, arguments: LoginModel(
-                      emailController.text,
-                      '123456'
-                    ));
-                  }
-                },
-              ),
-            ],
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Incorrect password';
+                    }
+                    return null;
+                  },
+                ),
+                RaisedButton(
+                  child: Text('Log in'),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      Navigator.pushNamed(context, PostsPageRoute,
+                          arguments:
+                              LoginModel(emailController.text, '123456'));
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
