@@ -9,7 +9,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Continue?',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.blueGrey,
+          shape: RoundedRectangleBorder(),
+          textTheme: ButtonTextTheme.primary,
+        ),
+        primarySwatch: Colors.blueGrey,
       ),
       initialRoute: LoginPageRoute,
       routes: {

@@ -25,50 +25,67 @@ class _LoginPage extends State<LoginPage> {
           decoration: BoxDecoration(
               color: Colors.black12, borderRadius: BorderRadius.circular(20.0)),
           padding: EdgeInsets.all(20.0),
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
+          height: 285,
           width: 300,
-          height: 250,
           child: Form(
             key: _formKey,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TextFormField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Incorrect email';
-                    }
-                    return null;
-                  },
+                Padding(
+                  padding: EdgeInsets.only(top: 5.0),
+                  child: new TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      RegExp exp = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
+                      if (!exp.hasMatch(value)) {
+                        return 'Invalid email';
+                      }
+                      return null;
+                    },
+                  )
                 ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0),
+                  child: new TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Empty password';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Incorrect password';
-                    }
-                    return null;
-                  },
                 ),
-                RaisedButton(
-                  child: Text('Log in'),
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Navigator.pushNamed(context, PostsPageRoute,
-                          arguments:
-                              LoginModel(emailController.text, '123456'));
-                    }
-                  },
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0),
+                  child: new ButtonTheme(
+                    minWidth: 260,
+                    height: 45,
+                    textTheme: ButtonTextTheme.primary,
+                    child: RaisedButton(
+                      child: Text('Log in'),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          Navigator.pushNamed(context, PostsPageRoute,
+                              arguments:
+                              LoginModel(emailController.text, passwordController.text));
+                        }
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

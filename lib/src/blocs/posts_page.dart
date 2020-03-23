@@ -28,6 +28,9 @@ class _PostsPage extends State<PostsPage> {
             Text(
               widget.arguments.email,
             ),
+            Text(
+              widget.arguments.password,
+            ),
           ],
         ),
       ),
