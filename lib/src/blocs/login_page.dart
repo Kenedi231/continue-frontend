@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:continue_app/src/material/routes.dart';
 import 'package:continue_app/src/models/login_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -44,6 +45,15 @@ class _LoginPage extends State<LoginPage> {
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
+//                      Fluttertoast.showToast(
+//                          msg: "Not valid data",
+//                          toastLength: Toast.LENGTH_LONG,
+//                          gravity: ToastGravity.BOTTOM,
+//                          timeInSecForIosWeb: 2,
+//                          backgroundColor: Colors.blueGrey,
+//                          textColor: Colors.white,
+//                          fontSize: 16.0
+//                      );
                       RegExp exp = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
                       if (!exp.hasMatch(value)) {
                         return 'Invalid email';
