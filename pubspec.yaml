@@ -17,7 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  fluttertoast: ^4.0.0
+  flushbar: ^1.9.1
   flutter:
     sdk: flutter
 
